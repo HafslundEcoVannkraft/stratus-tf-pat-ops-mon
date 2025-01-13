@@ -30,7 +30,7 @@ resource "azurerm_monitor_activity_log_alert" "main" {
     category = "ServiceHealth"
     service_health {
       locations = ["${var.location}"]
-      services  = ["var.services"]
+      services  = ["${var.services}"]
     }
   }
 
