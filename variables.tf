@@ -15,7 +15,7 @@ variable "location" {
 
 variable "email_address" {
   description = "The email address to send alerts to"
-  type        = string
+  type        = list(string)
 }
 
 variable "subscription_id" {
