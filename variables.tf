@@ -10,7 +10,7 @@ variable "environment" {
 
 variable "location" {
   description = "The location to deploy the resources to"
-  type        = string
+  type        = list(string)
 }
 
 variable "email_address" {
