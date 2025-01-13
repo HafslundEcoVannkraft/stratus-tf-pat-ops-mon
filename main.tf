@@ -29,7 +29,7 @@ resource "azurerm_monitor_activity_log_alert" "main" {
   criteria {
     category = "ServiceHealth"
     service_health {
-      locations = var.location
+      locations = var.services_locations
       services  = var.services
     }
   }

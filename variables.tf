@@ -10,8 +10,7 @@ variable "environment" {
 
 variable "location" {
   description = "The location to deploy the resources to"
-  type        = set(string)
-
+  type        = string
 }
 
 variable "email_address" {
@@ -27,4 +26,11 @@ variable "subscription_id" {
 variable "services" {
   description = "The services to monitor"
   type        = list(string)
+}
+
+
+variable "services_locations" {
+  description = "The location to deploy the resources to"
+  type        = list(string)
+
 }
