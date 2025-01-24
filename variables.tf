@@ -34,3 +34,20 @@ variable "services_locations" {
   type        = list(string)
 
 }
+variable "budget_amount" {
+  description = "The budget amount"
+  type        = number
+  default     = 0
+}
+
+variable "budget_notifications_actual" {
+  type = list(number)
+  description = "A list of percentage values (e.g., [80, 100, 120]), notifications will be sent when the budget exceed these percentages"
+  default     = [80, 100, 120]
+}
+
+variable "budget_notifications_forecasted" {
+  type = list(number)
+  description = "A list of percentage values (e.g., [100]), notifications will be sent when the budget is forecasted to exceed these percentages"
+  default     = [100]
+}
