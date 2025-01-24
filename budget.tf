@@ -22,21 +22,24 @@ locals {
 
 # Time resources for setting budget start_date and end_date
 resource "time_static" "current_time" {
+  count = var.budget_amount != 0 ? 1 : 0
 }
 resource "time_offset" "ten_years" {
+  count = var.budget_amount != 0 ? 1 : 0
   offset_years = 10
 }
 
 # Create the Budget resource
 resource "azurerm_consumption_budget_subscription" "budget" {
+    count           = var.budget_amount != 0 ? 1 : 0
     name            = "${var.code_name}-budget"
     subscription_id = "/subscriptions/${var.subscription_id}"
     amount          = var.budget_amount
     time_grain      = "Monthly"
 
     time_period {
-        start_date = formatdate("YYYY-MM-01'T'00:00:00Z", time_static.current_time.rfc3339)
-        end_date   = time_offset.ten_years.rfc3339
+        start_date = formatdate("YYYY-MM-01'T'00:00:00Z", time_static.current_time[0].rfc3339)
+        end_date   = time_offset.ten_years[0].rfc3339
     }
 
     dynamic "notification" {
