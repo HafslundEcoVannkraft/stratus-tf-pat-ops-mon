@@ -1,6 +1,6 @@
 # stratus-tf-pat-ops-mon
 This Terraform module creates a resource group, action group, and activity log alert for service health alerts in Azure.
-It also creates a consumption budget
+It also creates a consumption budget with notifications.
 
 ## Required inputs
 
@@ -27,11 +27,11 @@ It also creates a consumption budget
 
 ```hcl
 module "service_health_alerts" {
-  source                          = ""github.com/HafslundEcoVannkraft/stratus-tf-pat-ops-mon"
+  source                          = "github.com/HafslundEcoVannkraft/stratus-tf-pat-ops-mon"
   code_name                       = "example"
   environment                     = "prod"
   location                        = "West Europe"
-  email_address                   = ["email1@hafslund.no", email2@hafslund.no]
+  email_address                   = ["alerts@example.com"]
   subscription_id                 = "00000000-0000-0000-0000-000000000000"
   services                        = ["Service1", "Service2"]
   services_locations              = ["West Europe", "East US"]
@@ -44,11 +44,11 @@ module "service_health_alerts" {
 #### Example 2: Setting up only service health alerts
 ```hcl
 module "service_health_alerts" {
-  source                          = ""github.com/HafslundEcoVannkraft/stratus-tf-pat-ops-mon"
+  source                          = "github.com/HafslundEcoVannkraft/stratus-tf-pat-ops-mon"
   code_name                       = "example"
   environment                     = "prod"
   location                        = "West Europe"
-  email_address                   = ["email1@hafslund.no", email2@hafslund.no]
+  email_address                   = ["alerts@example.com"]
   subscription_id                 = "00000000-0000-0000-0000-000000000000"
   services                        = ["Service1", "Service2"]
   services_locations              = ["West Europe", "East US"]
@@ -59,11 +59,11 @@ module "service_health_alerts" {
 
 ```hcl
 module "service_health_alerts" {
-  source                          = ""github.com/HafslundEcoVannkraft/stratus-tf-pat-ops-mon"
+  source                          = "github.com/HafslundEcoVannkraft/stratus-tf-pat-ops-mon"
   code_name                       = "example"
   environment                     = "prod"
   location                        = "West Europe"
-  email_address                   = ["email1@hafslund.no", email2@hafslund.no]
+  email_address                   = ["alerts@example.com"]
   subscription_id                 = "00000000-0000-0000-0000-000000000000"
   budget_amount                   = 5000
   budget_notifications_actual     = [80, 100, 120]
