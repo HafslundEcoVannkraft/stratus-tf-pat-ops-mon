@@ -14,7 +14,7 @@ variable "location" {
 }
 
 variable "email_address" {
-  description = "The email address to send alerts to"
+  description = "The email addresses to send alerts to"
   type        = list(string)
 }
 
@@ -26,11 +26,30 @@ variable "subscription_id" {
 variable "services" {
   description = "The services to monitor"
   type        = list(string)
+  default     = []
 }
 
 
 variable "services_locations" {
   description = "The location to deploy the resources to"
   type        = list(string)
+  default     = []
 
+}
+variable "budget_amount" {
+  description = "The budget amount"
+  type        = number
+  default     = 0
+}
+
+variable "budget_notifications_actual" {
+  type = list(number)
+  description = "A list of percentage values (e.g., [80, 100, 120]), notifications will be sent when the budget exceed these percentages"
+  default     = [80, 100, 120]
+}
+
+variable "budget_notifications_forecasted" {
+  type = list(number)
+  description = "A list of percentage values (e.g., [100]), notifications will be sent when the budget is forecasted to exceed these percentages"
+  default     = [100]
 }
