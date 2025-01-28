@@ -14,7 +14,7 @@ variable "location" {
 }
 
 variable "email_address" {
-  description = "The email address to send alerts to"
+  description = "The email addresses to send alerts to"
   type        = list(string)
 }
 
@@ -26,12 +26,14 @@ variable "subscription_id" {
 variable "services" {
   description = "The services to monitor"
   type        = list(string)
+  default     = []
 }
 
 
 variable "services_locations" {
   description = "The location to deploy the resources to"
   type        = list(string)
+  default     = []
 
 }
 variable "budget_amount" {
