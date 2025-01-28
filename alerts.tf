@@ -11,7 +11,7 @@ resource "azurerm_resource_group" "service_health_alerts_rg" {
 # The Action Group
 # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group
 resource "azurerm_monitor_action_group" "service_health_action_group" {
-  count    = var.services != [] ? 1 : 0
+  count               = var.services != [] ? 1 : 0
   name                = "${var.code_name}-${var.environment}-service_health_ag"
   resource_group_name = azurerm_resource_group.service_health_alerts_rg[0].name
   short_name          = "shalert"
