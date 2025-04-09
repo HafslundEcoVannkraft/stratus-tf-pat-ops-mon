@@ -22,16 +22,18 @@ locals {
 
 
 resource "terraform_data" "input_variable_hash" {
-  input = sha1(jsonencode(
+  input = sha1(
       # if any of these variables change, the budget start and end date will be re-computed
-      var.code_name,
-      var.environment,
-      var.email_address,
-      var.subscription_id,
-      var.budget_amount,
-      var.budget_notifications_actual,
-      var.budget_notifications_forecasted
-  ))
+      join("", [
+        jsonencode(var.code_name),
+        jsonencode(var.environment),
+        jsonencode(var.email_address),
+        jsonencode(var.subscription_id),
+        jsonencode(var.budget_amount),
+        jsonencode(var.budget_notifications_actual),
+        jsonencode(var.budget_notifications_forecasted)
+      ])
+  )
 }
 
 # Time resources for setting budget start_date and end_date
