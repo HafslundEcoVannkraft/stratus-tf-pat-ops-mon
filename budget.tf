@@ -20,13 +20,34 @@ locals {
   notifications = merge(local.notifications_forcasted, local.notifications_actual)
 }
 
+
+resource "terraform_data" "input_variable_hash" {
+  input = sha1(jsonencode(
+      # if any of these variables change, the budget start and end date will be re-computed
+      var.code_name,
+      var.environment,
+      var.email_address,
+      var.subscription_id,
+      var.budget_amount,
+      var.budget_notifications_actual,
+      var.budget_notifications_forecasted
+  ))
+}
+
 # Time resources for setting budget start_date and end_date
 resource "time_static" "current_time" {
   count = var.budget_amount != 0 ? 1 : 0
+  lifecycle {
+    replace_triggered_by = [terraform_data.input_variable_hash]
+  }
 }
+
 resource "time_offset" "ten_years" {
   count = var.budget_amount != 0 ? 1 : 0
   offset_years = 10
+  lifecycle {
+    replace_triggered_by = [terraform_data.input_variable_hash]
+  }
 }
 
 # Create the Budget resource
